@@ -379,7 +379,7 @@ catch syscall <syscallName>
 catch syscall close	//捕获close
 ```
 
-如果直接捕获信号，会停在很多系统文件哪里，只是没有必要的。小技巧：先b mian再r运到到这个断点，也就是让程序先跑起来，再去设置catch syscall <syscallName>，这样子停下来的就全是自己的文件的
+如果直接捕获信号，会停在很多系统文件哪里，这是没有必要的。小技巧：先b main再r运到到这个断点，也就是让程序先跑起来，再去设置catch syscall <syscallName>，这样子停下来的就全是自己的文件的
 
 # P12 2-3断点执行命令
 
@@ -457,7 +457,7 @@ ptype /m test1	//只显示成员变量，不显示成员函数
 ptype /t test3	//typedef也不显示
 ptype /o node	//查看node结构体的成员偏移量和大小，和node总大小
 
-ptype test2	//加入test2是test1的派生类，那么只会显示test1的成员
+ptype test2	//加入test2是test1的派生类，那么只会显示test1的成员。
 set print object on	//这样子才会显示派生类的类型
 ```
 
@@ -580,7 +580,11 @@ jump 12	//如果跳转的位置有断点，就会停在这里
 jump test_label
 ```
 
-jump只能使用于本函数跳转，不要跨函数，否则可能出现无法预期的错误
+jump只能使用于本函数跳转，不要跨函数，否则可能出现无法预期的错误.
+
+原因：
+
+jump命令不会改变当前的程序栈中的内容
 
 ```
 使用jump跳到其他函数的方法
